@@ -27,4 +27,5 @@ Route::middleware('auth')
                     ->group(function(){
                         Route::get('/', 'PageController@index')->name('index');
                         Route::resource('pizze', 'PizzaController');
+                        Route::resource('ingredients', 'IngredientController');
                     });
