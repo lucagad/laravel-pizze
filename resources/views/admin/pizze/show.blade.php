@@ -7,13 +7,15 @@
               <h5 class="card-title">{{$pizza->name}}</h5>
               <p class="card-text"> Prezzo: {{$pizza->price}}</p>
               <p class="card-text"> Popolarità: {{$pizza->popularity}}</p>
-              <p class="card-text"> Ingredienti: </p>
-              <ul>
-                @foreach ( $pizza->ingredients as $ingredient )
-                  <li class="card-text">{{$ingredient->name}}</li>
-                @endforeach
-              </ul>
-              {{-- <p class="card-text"> Ingredienti: {{$ingredient->name}}</p> --}}
+
+              @if(count($pizza->ingredients) != 0)
+                <p class="card-text"> Ingredienti: </p>
+                <ul>
+                  @foreach ( $pizza->ingredients as $ingredient )
+                    <li class="card-text">{{$ingredient->name}}</li>
+                  @endforeach
+                </ul>
+              @endif
 
               <p class="card-text"> Vegana: {{$pizza->is_veggie ? 'Si': 'No'}}</p>
               <p class="card-text"> Descrizione: {{$pizza->description}}</p>

@@ -12,7 +12,6 @@ class Pizza extends Model
         'slug',
         'price',
         'popularity',
-        // 'ingredients',
         'is_veggie',
         'description',
     ];

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PizzaRequest;
 use Illuminate\Http\Request;
 use App\Pizza;
+use App\Ingredient;
 
 class PizzaController extends Controller
 {
@@ -73,8 +74,10 @@ class PizzaController extends Controller
      */
     public function edit($id)
     {
+        $ingredients = Ingredient::all();
+
         $pizza = Pizza::find($id);
-        return view('admin.pizze.edit', compact('pizza'));
+        return view('admin.pizze.edit', compact('pizza','ingredients'));
     }
 
     /**
@@ -104,8 +107,20 @@ class PizzaController extends Controller
             $pizze->is_veggie = false;
         }
 
-
         $pizze->update($new_pizza);
+
+
+        if(array_key_exists('ingredients',$new_pizza)){
+
+            $pizze->ingredients()->sync($new_pizza['ingredients']);
+            
+        } else {
+
+            $pizze->ingredients()->detach();
+
+        }
+
+
         return redirect()->route('admin.pizze.show', $pizze);
     }
 
