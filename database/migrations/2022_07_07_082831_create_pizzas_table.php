@@ -19,7 +19,7 @@ class CreatePizzasTable extends Migration
             $table->string('name', 80);
             $table->double('price', 8, 2);
             $table->tinyInteger('popularity');
-            $table->string('ingredients');
+            // $table->string('ingredients');
             $table->boolean('is_veggie');
             $table->text('description');
             $table->timestamps();

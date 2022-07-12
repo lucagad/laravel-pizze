@@ -25,13 +25,15 @@
                   <p class="text-danger"> {{$message}} </p>
                 @enderror
               </div>
-              <div class="mb-3">
+
+              {{-- <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Ingredienti</label>
                 <input type="text" value="{{old('ingredients')}}" name="ingredients" class="form-control  @error('ingredients') is-invalid @enderror"  >
                 @error('ingredients')
                   <p class="text-danger"> {{$message}} </p>
                 @enderror
-              </div>
+              </div> --}}
+
               <div class="mb-3">
                 <label for="" class="form-label">Pizza vegana ?</label>
                 <select value="{{old('is_veggie')}}" name="is_veggie" id=""class="my-4  @error('is_veggie') is-invalid @enderror">

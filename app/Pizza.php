@@ -12,7 +12,7 @@ class Pizza extends Model
         'slug',
         'price',
         'popularity',
-        'ingredients',
+        // 'ingredients',
         'is_veggie',
         'description',
     ];
@@ -32,4 +32,10 @@ class Pizza extends Model
 
         return $slug;
     }
+
+    public function ingredients(){
+        return $this->belongsToMany('App\Ingredient');
+    }
+
+
 }
