@@ -26,13 +26,22 @@
                 @enderror
               </div>
 
-              {{-- <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Ingredienti</label>
-                <input type="text" value="{{old('ingredients')}}" name="ingredients" class="form-control  @error('ingredients') is-invalid @enderror"  >
-                @error('ingredients')
-                  <p class="text-danger"> {{$message}} </p>
-                @enderror
-              </div> --}}
+              <div class="mb-3">
+                <label for="ingredients_id" class="form-label">Ingredienti: </label>
+
+                @foreach ($ingredients as $ingredient)
+                    <input type="checkbox"
+                        name="ingredients[]"
+                        id="ingredient{{$loop->iteration}}"
+
+                        @if (in_array($ingredient->id, old('ingredients', [])))
+                          checked
+                        @endif
+
+                        value="{{ $ingredient->id }}">
+                            <label class="mr-3'" for="ingredient{{$loop->iteration}}">{{$ingredient->name}}</label>
+                        @endforeach
+              </div>
 
               <div class="mb-3">
                 <label for="" class="form-label">Pizza vegana ?</label>

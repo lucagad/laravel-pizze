@@ -39,7 +39,10 @@
                             <a href="{{route('admin.pizze.edit', $pizza)}}" class="btn btn-secondary">
                                 Edit
                             </a>
-                            <form action="{{ route('admin.pizze.destroy', $pizza) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.pizze.destroy', $pizza) }}" 
+                            method="POST" 
+                            class="d-inline"
+                            onsubmit=" return confirm('Sei sicuro di voler eliminare la pizza: {{ $pizza->name}} ?')">
                                 @csrf
                                 @method('DELETE')
                                 <input type="submit" value="Delete" class="btn btn-danger">

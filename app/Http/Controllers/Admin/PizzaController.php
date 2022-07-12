@@ -28,7 +28,8 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        return view('admin.pizze.create');
+        $ingredients = Ingredient::all();
+        return view('admin.pizze.create', compact('ingredients'));
     }
 
     /**
@@ -41,6 +42,7 @@ class PizzaController extends Controller
     {
 
         $pizza = $request->all();
+
         $new_pizza = new Pizza;
         $new_pizza->fill($pizza);
         $new_pizza->slug = $new_pizza->generateSlug($new_pizza->name);
@@ -49,7 +51,14 @@ class PizzaController extends Controller
         }else{
             $new_pizza->is_veggie = false;
         }
+
         $new_pizza->save();
+
+        if(array_key_exists('ingredients',$pizza)){
+
+            $new_pizza->ingredients()->attach($pizza['ingredients']);
+        }
+
         return redirect()->route('admin.pizze.index');
 
     }
@@ -113,7 +122,7 @@ class PizzaController extends Controller
         if(array_key_exists('ingredients',$new_pizza)){
 
             $pizze->ingredients()->sync($new_pizza['ingredients']);
-            
+
         } else {
 
             $pizze->ingredients()->detach();
@@ -131,8 +140,10 @@ class PizzaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Pizza $pizze)
-    {
+    {   
+        $pizze->ingredients()->detach();
         $pizze->delete();
+
         return redirect()->route('admin.pizze.index')->with('cancellato',"Cancellazione avvenuta con successo! Parola di Giancarlo");
     }
 }
